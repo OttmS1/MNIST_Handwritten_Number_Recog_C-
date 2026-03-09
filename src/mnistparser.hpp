@@ -45,7 +45,7 @@ public:
       std::cerr << "Error reading file header\n";
     }
 
-    // boost endian reverse
+    // boost-lib endian reverse
     big_to_native_inplace(header.magicNum);
     big_to_native_inplace(header.numImages);
     big_to_native_inplace(header.numRows);
