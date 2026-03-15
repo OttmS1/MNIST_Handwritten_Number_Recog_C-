@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdlib>
+#include <chrono>
+#include "neuralnet.hpp"
 
 
 int main() {
@@ -7,6 +9,8 @@ int main() {
    const char* trainLabelFile = "../data/train-labels";
    const char* testImgFile= "../data/test-images";
    const char* testLabelFile = "../data/test-labels";
+
+   const size_t batchSize = 1;
 
    std::srand(std::time(NULL));
 
@@ -19,7 +23,7 @@ int main() {
    
    NeuralNet net(files);
 
-   net.train(60000 * 6);
+   net.train(1000000, batchSize);
 
    net.evalNetwork(); 
 
