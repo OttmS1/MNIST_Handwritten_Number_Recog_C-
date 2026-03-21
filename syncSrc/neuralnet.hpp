@@ -1,6 +1,7 @@
 #include "mnistparser.hpp"
 #include <cmath>
 #include <armadillo>
+#include <boost/thread.hpp>
 
 class NeuralNet {
    private:
@@ -100,7 +101,9 @@ class NeuralNet {
          neuronsA[0] = neuronsZ[0];
       }
 
-      void train(size_t steps, const size_t batchSize) {
+      template<int batchSize>
+      void train() {
+         size_t steps = 100000;
          arma::Col<float> result(10);
          arma::Col<float> goal(10, arma::fill::zeros);
          arma::Col<float> costVec(10, arma::fill::zeros);
@@ -138,7 +141,7 @@ class NeuralNet {
          }
       }
 
-      void evalNetwork() {
+      float evalNetwork() {
          double diff = 0;
          arma::Col<float> goal(10, arma::fill::zeros);
 
@@ -153,9 +156,10 @@ class NeuralNet {
             goal.zeros();
          }
 
-         std::printf("%s", "average cost across test examples: ");
+         /*std::printf("%s", "average cost across test examples: ");
          std::printf("%f", diff / i);
-         std::printf("%c", '\n');
+         std::printf("%c", '\n');*/
+         return diff / i;
       }
 
       void guess() {
