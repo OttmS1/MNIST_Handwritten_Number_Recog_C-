@@ -23,8 +23,8 @@ int main() {
    NeuralNet net(files);
 
    net.train<10>();
-   std::printf("%f", net.evalNetwork());
-   
+
+   std::printf("Avg cost: %f", net.evalNetwork()); 
 
    return 0;
 }

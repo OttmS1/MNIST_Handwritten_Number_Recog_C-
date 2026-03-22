@@ -26,7 +26,7 @@ public:
   Header header;
 
   MnistParser(const char *imageFileName, const char *labelFileName,
-          std::vector<uint8_t> &dataVec, std::vector<uint8_t> &labelVec)
+              std::vector<uint8_t> &dataVec, std::vector<uint8_t> &labelVec)
       : m_imageFileName(imageFileName), m_labelFileName(labelFileName) {
     parseImageFile(dataVec);
     parseLabelFile(labelVec);

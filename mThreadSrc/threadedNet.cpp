@@ -206,9 +206,7 @@ arma::Col<float> &NN::NeuralNet::backprop(
 }
 
 void NN::NeuralNet::train() {
-  const size_t TRAINING_STEPS = 10000;
-  constexpr int numThreads = 16;
-  constexpr int batchSize = 32;
+  const int numThreads = std::thread::hardware_concurrency();
   const int numBatches = train_imgLabelPairs.size() / batchSize;
 
   std::vector<std::vector<ILPair>> batches(numBatches);
@@ -250,8 +248,7 @@ void NN::NeuralNet::train() {
     if (epoch % 1000 == 0) {
       std::printf("%s", "Epoch ");
       std::printf("%i", epoch);
-      std::printf("%s", ":\t");
-      this->evalNetwork(false);
+      std::printf("%s", " done\n");
     }
   }
   this->evalNetwork(true);
